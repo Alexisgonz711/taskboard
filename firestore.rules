@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if request.auth != null;
+
+      allow create: if request.auth != null &&
+        request.auth.uid == userId &&
+        request.resource.data.uid == userId;
+
+      allow update: if request.auth != null && (
+        request.auth.uid == resource.data.uid ||
+        request.auth.uid == userId ||
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['projets', 'updatedAt'])
+      );
+
+    }
+
+    match /projets/{projetId} {
+      allow create: if request.auth != null;
+
+      allow read: if request.auth != null && (
+        request.auth.uid == resource.data.owner ||
+        request.auth.uid in resource.data.memberUIDs
+      );
+
+      allow update: if request.auth != null && (
+        request.auth.uid == resource.data.owner ||
+        request.auth.uid in resource.data.memberUIDs
+      );
+
+      allow delete: if request.auth != null && (
+        request.auth.uid == resource.data.owner ||
+        request.auth.uid in resource.data.memberUIDs
+      );
+    }
+  }
+}
