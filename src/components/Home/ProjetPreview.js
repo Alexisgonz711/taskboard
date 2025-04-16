@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../Sign/UserContext";
-import { query, where, getDocs, getDoc, doc, limit } from "firebase/firestore";
-import { projetCollection, usersCollection } from "../../firebase";
+import { query, where, getDocs, limit } from "firebase/firestore";
+import { projetCollection } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 /**

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../Sign/UserContext';
 import { projetCollection } from '../../firebase';
@@ -21,7 +21,7 @@ function MyProject() {
    const [selectedTask, setSelectedTask] = useState(null);
    const [showAddTask, setShowAddTask] = useState(false);
    const [activeColumn, setActiveColumn] = useState(null);
-   const [loading, setLoading] = useState(true);
+   const [, setLoading] = useState(true);
    const [isOwner, setIsOwner] = useState(false);
 
    const toggleAddTask = useCallback((category) => {
@@ -29,11 +29,11 @@ function MyProject() {
       setActiveColumn(category);
    }, [showAddTask]);
 
-   const categoryLabels = {
+   const categoryLabels = useMemo(() => ({
       aFaire: 'À faire',
       enCours: 'En cours',
       fait: 'Terminé',
-   };
+   }), []);
 
    const initialCategoriesOrder = [
       { category: 'aFaire', order: 1 },
@@ -43,7 +43,7 @@ function MyProject() {
 
    const getCategoryLabel = useCallback((categoryKey) => {
       return categoryLabels[categoryKey] || categoryKey;
-   }, []);
+   }, [categoryLabels]);
 
    const checkUserPermissions = useCallback((projectData) => {
       if (!user || !projectData) return false;
@@ -83,7 +83,7 @@ function MyProject() {
       };
 
       fetchProjectData();
-   }, [user, projectId, checkUserPermissions]);
+   }, [user, projectId, checkUserPermissions, setLoading]);
 
    const handleAddTask = useCallback(async (newTask) => {
       try {

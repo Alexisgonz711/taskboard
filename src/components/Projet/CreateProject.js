@@ -3,7 +3,6 @@ import { addDoc, projetCollection, usersCollection } from '../../firebase';
 import { useUser } from '../Sign/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDocs, query, updateDoc, where, setDoc } from 'firebase/firestore';
-import { getFunctions, httpsCallable } from 'firebase/functions';
 import Modal from '../Modal/Modal';
 
 const MAX_MEMBERS = 10;

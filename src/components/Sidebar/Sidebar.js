@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, Outlet } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../Sign/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";

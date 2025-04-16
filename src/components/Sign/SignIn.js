@@ -34,12 +34,11 @@ export default function SignIn() {
     try {
       setError(null);
 
-      const userCredential = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         email,
         pass
       );
-      const user = userCredential.user;
       navigate("/");
     } catch (error) {
       const errorCode = error.code;
