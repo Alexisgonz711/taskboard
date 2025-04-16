@@ -12,7 +12,7 @@ export default function Hero() {
             </h1>
             <button
                onClick={() => setIsModalOpen(true)}
-               className="px-4 py-2 bg-mirage-500 text-white hover:bg-mirage-600 rounded-lg transition-colors duration-200"
+               className="hidden sm:block px-4 py-2 bg-mirage-500 text-white hover:bg-mirage-600 rounded-lg transition-colors duration-200"
             >
                Créer un projet
             </button>

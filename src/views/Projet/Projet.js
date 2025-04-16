@@ -112,7 +112,7 @@ function Projet() {
                userProjects.map(project => (
                   <div key={project.id} className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300">
                      <div className="p-6">
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                            <div>
                               <h3 className="text-lg font-medium text-gray-900">{project.name}</h3>
                               {!project.isOwner && (
